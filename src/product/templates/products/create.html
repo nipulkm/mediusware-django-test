@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Create Product</h1>
+    <h1 class="h3 mb-0 text-gray-800">{{ action }} Product</h1>
     <a href="{% url 'product:create.product' %}" class="float-right btn btn-primary">All Product</a>
 </div>
 
 <div id="app">
-    <create-product :variants="{{variants|safe}}"></create-product>
+    <create-product :variants="{{variants|safe}}" :product="{{product|safe}}" :product_variant_list="{{product_variant_list|safe}}" :product_variant_price_list="{{product_variant_price_list|safe}}"></create-product>
 </div>
 
 {% endblock %}

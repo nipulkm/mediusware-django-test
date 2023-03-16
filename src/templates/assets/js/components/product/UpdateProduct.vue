@@ -108,43 +108,30 @@ export default {
     InputTag
   },
   props: {
-    product: {
-      type: Array,
-      required: true
-    },
     variants: {
-      type: Array,
-      required: true
-    },
-    product_variant_list: {
-      type: Array,
-      required: true
-    },
-    product_variant_price_list: {
       type: Array,
       required: true
     }
   },
   data() {
     return {
-        product_id: null,
-        product_name: '',
-        product_sku: '',
-        description: '',
-        images: [],
-        product_variant: [
-            {
-            option: this.variants[0].id,
-            tags: []
-            }
-        ],
-        product_variant_prices: [],
-        dropzoneOptions: {
-            url: 'https://httpbin.org/post',
-            thumbnailWidth: 150,
-            maxFilesize: 0.5,
-            headers: {"My-Awesome-Header": "header value"}
+      product_name: '',
+      product_sku: '',
+      description: '',
+      images: [],
+      product_variant: [
+        {
+          option: this.variants[0].id,
+          tags: []
         }
+      ],
+      product_variant_prices: [],
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        thumbnailWidth: 150,
+        maxFilesize: 0.5,
+        headers: {"My-Awesome-Header": "header value"}
+      }
     }
   },
   methods: {
@@ -199,47 +186,25 @@ export default {
         description: this.description,
         product_image: this.images,
         product_variant: this.product_variant,
-        product_variant_prices: this.product_variant_prices,
-        id: this.product_id
+        product_variant_prices: this.product_variant_prices
       }
 
     axios.defaults.xsrfCookieName = 'csrftoken'
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+  axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
-    if(!this.product.length){
-        axios.post('/product/create-product/', product).then(response => {
+      axios.post('/product/product-create/', product).then(response => {
         console.log(response.data);
       }).catch(error => {
         console.log(error);
       })
-    } else {
-        axios.post('/product/update-product/', product).then(response => {
-        console.log(response.data);
-      }).catch(error => {
-        console.log(error);
-      })
-    }
 
       console.log(product);
-    },
-
-    setProductInfo() {
-        if(this.product.length){
-            this.product_variant = this.product_variant_list;
-            this.product_variant_prices = this.product_variant_price_list;
-            console.log(this.product_variant_list);
-            this.product_name = this.product[0].title;
-            this.product_sku = this.product[0].sku;
-            this.description = this.product[0].description;
-            this.product_id = this.product[0].id;
-        }
     }
 
 
   },
   mounted() {
     console.log('Component mounted.')
-    this.setProductInfo();
   }
 }
 </script>
