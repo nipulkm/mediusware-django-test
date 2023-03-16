@@ -68,7 +68,7 @@
                             <td>{{ product.title }} <br> Created at : {{ product.created_at }}</td>
                             <td>{{ product.description }}</td>
                             <td>
-                                <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
+                                <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant_{{product.id}}">
                                     {% for variant in product.productvariantprice_set.all%}
                                         <dt class="col-sm-3 pb-0">
                                             {{ variant.product_variant_one.variant_title }}/ {{ variant.product_variant_two.variant_title }}/ {{ variant.product_variant_three.variant_title }}
@@ -82,7 +82,7 @@
 
                                     {% endfor %}
                                 </dl>
-                                <button onclick="$('#variant').toggleClass('h-auto')" class="btn btn-sm btn-link">Show more
+                                <button onclick="$(`#variant_{{product.id}}`).toggleClass('h-auto')" class="btn btn-sm btn-link">Show more
                                 </button>
                             </td>
                             <td>
